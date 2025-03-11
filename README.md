@@ -1,6 +1,6 @@
 # Git Changelog Generator
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
 
 The **Git Changelog Generator** is a Python script that automates the creation of user-friendly changelogs from Git repositories. Whether you're summarizing updates from a local repo on your machine or a public GitHub repo, this tool fetches the latest commits and uses Anthropic's Claude AI to craft clear, engaging summaries tailored for non-technical users. It highlights major features and fixes—like new functionality or bug resolutions—while skipping minor code tweaks, making it perfect for sharing updates with end users or stakeholders.
 
@@ -33,11 +33,17 @@ The script grabs the last `n` commits from your chosen repository, collecting de
 For security, the script expects the Anthropic API key to be stored in an environment variable named CLAUDE_API_KEY. Set it up as follows:
 
 On Linux/MacOS:
-`export CLAUDE_API_KEY='your-api-key-here'`
+  ```bash
+  export CLAUDE_API_KEY='your-api-key-here'
+  ```
+
 Add the above line to your ~/.bashrc, ~/.zshrc, or equivalent shell configuration file to make it persistent.
 
 On Windows (Command Prompt):
-`setx CLAUDE_API_KEY "your-api-key-here"`
+  ```cmd
+  setx CLAUDE_API_KEY "your-api-key-here"
+  ```
+
 Note: You may need to restart your terminal or computer for the change to take effect.
 Alternatively, you can set the environment variable directly in your script execution environment, but avoid hardcoding sensitive data in the script itself.
 
@@ -56,25 +62,36 @@ Here are some examples of how to use the script:
 
 1. Generate a Changelog for a Local Repository
 Analyze the last 5 commits in a local Git repository located at ~/Projects/my-repo:
-
-`python script_name.py --local 1 --gitrepo ~/Projects/my-repo --num_commits 5`
+  ```bash
+  python script_name.py --local 1 --gitrepo ~/Projects/my-repo --num_commits 5
+  ```
 
 2. Generate a Changelog for a Remote GitHub Repository
 Analyze the last 3 commits on the main branch of a remote GitHub repository:
-
-`python script_name.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 3`
+  ```bash
+  python script_name.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 3
+  ```
 
 3. Analyze a Specific Branch in a Remote Repository
 Analyze the last 10 commits on the dev branch of a remote GitHub repository:
-
-`python script_name.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 10 --branch dev`
-
+  ```bash
+  python script_name.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 10 --branch dev
+  ```
 
 The script will output a Markdown-formatted changelog summarizing the commits in a user-friendly way, focusing on changes that matter to end-users.
 
 ## Troubleshooting
 ### Error: "Claude API key not set"
-Ensure you've set the CLAUDE_API_KEY environment variable correctly. Check its value by running echo $CLAUDE_API_KEY (Linux/MacOS) or echo %CLAUDE_API_KEY% (Windows Command Prompt).
+Ensure you've set the CLAUDE_API_KEY environment variable correctly. Check its value by running
+(Linux/MacOS):
+  ```bash
+  echo $CLAUDE_API_KEY 
+  ```
+or (Windows Command Prompt):
+
+  ```cmd
+  echo %CLAUDE_API_KEY%
+  ```
 
 ### Error: "Invalid GitHub URL"
 Ensure the remote repository URL follows the format https://github.com/owner/repo. Remove any trailing slashes or .git suffixes if present.

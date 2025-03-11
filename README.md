@@ -27,7 +27,7 @@ The script grabs the last `n` commits from your chosen repository, collecting de
 - **Anthropic API Key:** Sign up at `console.anthropic.com` to get one (trial credits may be available).
 - **Dependencies:** Install required packages:
   ```bash
-  pip install -r requirements.txt
+  python3 pip install -r requirements.txt
 
 ### Setting Up Environment Variables
 For security, the script expects the Anthropic API key to be stored in an environment variable named CLAUDE_API_KEY. Set it up as follows:
@@ -51,11 +51,13 @@ Alternatively, you can set the environment variable directly in your script exec
 Run the script from the command line using python3 print_changelog.py. The script accepts several command-line arguments to customize its behavior.
 
 ### Command-Line Arguments
-Argument	Description	Required	Default
---local	Specify if the repository is local (1) or remote (0).	Yes	N/A
---gitrepo	Path to the local Git repository or URL to the remote GitHub repository.	Yes	N/A
---num_commits	Number of commits to analyze (must be a positive integer).	Yes	N/A
---branch	Branch to analyze for remote repositories.	No	main
+| Argument   | Description | Required | Default |
+| -------- | ------- | ------- | ------- |
+| --local  | Specify if the repository is local (1) or remote (0).	| Yes	 | N/A  |
+| --gitrepo | Path to the local Git repository or URL to the remote GitHub repository.  | Yes	| N/A |
+| --num_commits    | Number of commits to analyze (must be a positive integer). | Yes | N/A |
+| --branch   | Branch to analyze for remote repositories. | No | `main` |
+| --help | Prints the usage of the CLI (no other args required) | No | N/A |
 
 ### Example Use Cases
 Here are some examples of how to use the script:
@@ -63,19 +65,25 @@ Here are some examples of how to use the script:
 1. Generate a Changelog for a Local Repository
 Analyze the last 5 commits in a local Git repository located at ~/Projects/my-repo:
   ```bash
-  python script_name.py --local 1 --gitrepo ~/Projects/my-repo --num_commits 5
+  python3 print_changelog.py --local 1 --gitrepo ~/Projects/my-repo --num_commits 5
   ```
 
 2. Generate a Changelog for a Remote GitHub Repository
 Analyze the last 3 commits on the main branch of a remote GitHub repository:
   ```bash
-  python script_name.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 3
+  python3 print_changelog.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 3
   ```
 
 3. Analyze a Specific Branch in a Remote Repository
 Analyze the last 10 commits on the dev branch of a remote GitHub repository:
   ```bash
-  python script_name.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 10 --branch dev
+  python3 print_changelog.py --local 0 --gitrepo https://github.com/owner/repo --num_commits 10 --branch dev
+  ```
+
+4. Get help using the CLI
+
+  ```bash
+  python3 print_changelog.py --help
   ```
 
 The script will output a Markdown-formatted changelog summarizing the commits in a user-friendly way, focusing on changes that matter to end-users.
